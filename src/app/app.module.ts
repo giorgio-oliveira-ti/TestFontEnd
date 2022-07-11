@@ -17,13 +17,18 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { IndicacoesComponent } from './components/indicacoes/indicacoes.component';
+import { NavComponent } from './nav/nav.component';
+import { IndicacaoService } from './services/indicacao.service';
 
 defineLocale('pt-br', ptBrLocale);
 
 @NgModule({
   declarations: [
     AppComponent,
-  ],
+    IndicacoesComponent,
+      NavComponent
+   ],
   imports: [
     BrowserModule,
     FormsModule,
@@ -40,14 +45,19 @@ defineLocale('pt-br', ptBrLocale);
     BsDatepickerModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 4000,
-      positionClass: 'toast-bottom-right',
+      positionClass: 'toast-top-right',
       preventDuplicates: true,
-      progressBar: true
-    })
-
-
+      progressBar: true,
+      iconClasses:{
+        error: 'toast-error',
+        info: 'toast-info',
+        success: 'toast-success',
+        warning: 'toast-warning',
+      }
+    },
+    )
   ],
-  providers: [],
+  providers: [IndicacaoService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

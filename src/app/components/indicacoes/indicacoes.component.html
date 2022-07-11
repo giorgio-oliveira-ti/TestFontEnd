@@ -1,0 +1,58 @@
+<br/>
+<hr>
+<br/>
+<div  class="form-inline">
+  <div class="row">
+    <div class="form-group col-10">
+      <input type="text"
+      [(ngModel)]="filtroLista"
+      class="form-control mr-2" placeholder="buscar">
+    </div>
+    <div class="form-group col-2">
+     <!--<button class="btn btn-outline-success ">Localizar</button>-->
+    </div>
+</div>
+</div>
+<br/>
+<h5>Localizar: {{filtroLista}}</h5>
+<table class="table table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th>#</th>
+      <th>name</th>
+      <th>cpf</th>
+      <th>telefone</th>
+      <th>email</th>
+      <th>Status</th>
+      <th>Excluir</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="indicacoes && indicacoes.length" >
+    <tr *ngFor="let indicacao of indicacoesFiltrados">
+      <td>{{indicacao.id}}</td>
+      <td>{{indicacao.name}}</td>
+      <td>{{indicacao.cpf}}</td>
+      <td>{{indicacao.telefone}}</td>
+      <td>{{indicacao.email}}</td>
+      <td>{{indicacao.Status}}</td>
+      <td>
+        <i class="fa fa-excluir"></i>
+        <button type="button" class="btn btn-primary" tooltip="Excluir"  (click)="openModal(template)"></button>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot *ngIf="!indicacoes.length">
+    <tr>
+      <td colspan="8" class="text-center">
+        <h4>Não existe indicações nesta lista</h4>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Tem certeza que quer deletar esta indicação?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()" >Sim</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
+  </div>
+</ng-template>
