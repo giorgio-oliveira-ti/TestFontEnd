@@ -1,0 +1,70 @@
+<app-title [title]="title" [inconCless]="inconCless2"></app-title>
+
+<form [formGroup]="form">
+  <!--<p>Form valor: {{form.value | json}}</p>
+  <p>Form status: {{form.status | json}}</p>-->
+  <div class="p-3 card rounded shadow-sm">
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label>Nome</label>
+        <input type="text" [ngClass]="cssValidar(x.name)"
+        class="form-control" placeholder="Insira o Nome" formControlName="name">
+      <div *ngIf="x.name.errors?.required"  class="invalid-feedback">
+        <i class="fa fa-ban" ></i>  Nome Obrigatório
+      </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <label>CPF</label>
+        <input type="text"  [ngClass]="cssValidar(x.cpf)"
+        class="form-control" placeholder="CPF" formControlName="cpf">
+        <div *ngIf="x.cpf.errors?.required"  class="invalid-feedback">
+          <i class="fa fa-ban" ></i>  CPF Obrigatório.
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label>Telefone</label>
+        <input type="text" [ngClass]="cssValidar(x.telefone)"
+        class="form-control" placeholder="(000) 90000-0000"  formControlName="telefone" >
+        <div *ngIf="x.telefone.errors?.required"  class="invalid-feedback">
+          <i class="fa fa-ban"></i>  Telefone Obrigatório.
+        </div>
+      </div>
+      <div class="col-md-4">
+
+
+        <label>Status: <b>{{VrStatus}}</b></label>
+        <select formControlName="Status" class="form-control" [ngClass]="cssValidar(x.Status)">
+          <option value="1">INICIADA</option>
+          <option value="2">EM PROCESSO</option>
+          <option value="3">FINALIZADA</option>
+        </select>
+        <div *ngIf="x.Status.errors?.required"  class="invalid-feedback">
+          <i class="fa fa-ban" ></i>  Telefone Obrigatório.
+        </div>
+    </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label>E-mail</label>
+        <input type="text"   [ngClass]="cssValidar(x.email)"
+        class="form-control" placeholder="E-mail" formControlName="email">
+        <div *ngIf="x.email.errors?.required"  class="invalid-feedback">
+          <i class="fa fa-ban" aria-hidden="true"></i>  E-mail Obrigatório.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <div class="col-md-12">
+      <button class="btn btn-outline-secondary mr-auto border"  routerLink="/Indicacoes">
+        Cancelar
+      </button>
+        <button class="btn btn-success bt_right" [disabled]="!form.valid" (click)="salvarIndicacao()">
+        Salvar
+      </button>
+    </div>
+  </div>
+</form>

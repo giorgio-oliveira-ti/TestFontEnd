@@ -16,10 +16,15 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { IndicacoesComponent } from './components/indicacoes/indicacoes.component';
-import { NavComponent } from './nav/nav.component';
+import { NavComponent } from './shared/nav/nav.component';
 import { IndicacaoService } from './services/indicacao.service';
+import { DocumentacaoComponent } from './components/documentacao/documentacao.component';
+import { HomeComponent } from './components/home/home.component';
+import { TitleComponent } from './shared/title/title.component';
+import { IndicacoesIsedComponent } from './components/indicacoesIsed/indicacoesIsed.component';
 
 defineLocale('pt-br', ptBrLocale);
 
@@ -27,15 +32,19 @@ defineLocale('pt-br', ptBrLocale);
   declarations: [
     AppComponent,
     IndicacoesComponent,
-      NavComponent
+      NavComponent,
+      DocumentacaoComponent,
+      HomeComponent,
+      TitleComponent,
+      IndicacoesIsedComponent
    ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),

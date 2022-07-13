@@ -21,4 +21,17 @@ export class IndicacaoService {
     return this.http.get<Iindicacao>(`${this.EndUrl}/${id}`)
   }
 
+  public postIndicacao(indicao: Iindicacao): Observable<Iindicacao>{
+    return this.http.post<Iindicacao>(this.EndUrl,indicao)
+  }
+
+  public putIndicacao(id:number, indicao: Iindicacao): Observable<Iindicacao>{
+    return this.http.put<Iindicacao>(`${this.EndUrl}/${id}`,indicao)
+  }
+
+  public deleteIndicacao(id:number): Observable<any>{
+    return this.http.delete<string>(`${this.EndUrl}/${id}`)
+  }
+
+
 }

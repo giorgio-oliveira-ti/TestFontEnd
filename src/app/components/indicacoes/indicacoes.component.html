@@ -1,57 +1,72 @@
+<app-title [title]="'Lista de Indicações'" [inconCless]="'fa fa-thumbs-up'"></app-title>
 <br/>
-<hr>
-<br/>
-<div  class="form-inline">
-  <div class="row">
-    <div class="form-group col-10">
-      <input type="text"
-      [(ngModel)]="filtroLista"
-      class="form-control mr-2" placeholder="buscar">
+
+<div class="card rounded shadow-sm p-3">
+    <div  class="d-flex">
+      <div class="flex-fill p-3">
+        <div class="input-group mb-3 ">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon3">Localizar</span>
+          </div>
+          <input type="text"
+          [(ngModel)]="filtroLista"
+          class="form-control" placeholder="Filtrar"/>
+        </div>
+      </div>
+      <div class="p-3">
+        <a href="" class="d-flex btn btn-outline-primary bt " tooltip="novo" routerLink="/Ised">
+          <i class="fa fa-plus-circle"></i>
+          <b class="ml-1 d-none d-sm-block">&nbsp;Novo</b>
+        </a>
+        </div>
     </div>
-    <div class="form-group col-2">
-     <!--<button class="btn btn-outline-success ">Localizar</button>-->
-    </div>
+    <label class="mr-2">Localizando por: {{filtroLista}}</label>
+
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>name</th>
+          <th>cpf</th>
+          <th class="d-none d-md-table-cell" >telefone</th>
+          <th class="d-none d-md-table-cell">email</th>
+          <th>Status</th>
+          <th>Excluir</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="indicacoes && indicacoes.length" >
+        <tr *ngFor="let indicacao of indicacoesFiltrados" (click)="editarIndicacoes(indicacao.id)" style="cursor:pointer;">
+          <td>{{indicacao.id}}</td>
+          <td>{{indicacao.name}}</td>
+          <td>{{indicacao.cpf}}</td>
+          <td class="d-none d-md-table-cell">{{indicacao.telefone}}</td>
+          <td class="d-none d-md-table-cell">{{indicacao.email}}</td>
+          <td>
+            <i class="fas fa-clipboard" *ngIf="indicacao.Status == 1"  tooltip="Indicada" style="color:chartreuse"></i>
+            <i class="fas fa-print" *ngIf="indicacao.Status == 2" tooltip="Em processo" style="color:rgb(72, 108, 207)"></i>
+            <i class="fa fa-hand-paper" *ngIf="indicacao.Status == 3" tooltip="Em Finalizado" style="color:rgb(226, 69, 21)"></i>
+          </td>
+          <td>
+
+            <button type="button" class="btn btn-primary" tooltip="Excluir"  (click)="openModal($event, template, indicacao.id)"><i class="fa fa-trash"></i></button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot *ngIf="!indicacoes.length">
+        <tr>
+          <td colspan="8" class="text-center">
+            <h4>Não existe indicações nesta lista</h4>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+
 </div>
-</div>
-<br/>
-<h5>Localizar: {{filtroLista}}</h5>
-<table class="table table-striped">
-  <thead class="table-dark">
-    <tr>
-      <th>#</th>
-      <th>name</th>
-      <th>cpf</th>
-      <th>telefone</th>
-      <th>email</th>
-      <th>Status</th>
-      <th>Excluir</th>
-    </tr>
-  </thead>
-  <tbody *ngIf="indicacoes && indicacoes.length" >
-    <tr *ngFor="let indicacao of indicacoesFiltrados">
-      <td>{{indicacao.id}}</td>
-      <td>{{indicacao.name}}</td>
-      <td>{{indicacao.cpf}}</td>
-      <td>{{indicacao.telefone}}</td>
-      <td>{{indicacao.email}}</td>
-      <td>{{indicacao.Status}}</td>
-      <td>
-        <i class="fa fa-excluir"></i>
-        <button type="button" class="btn btn-primary" tooltip="Excluir"  (click)="openModal(template)"></button>
-      </td>
-    </tr>
-  </tbody>
-  <tfoot *ngIf="!indicacoes.length">
-    <tr>
-      <td colspan="8" class="text-center">
-        <h4>Não existe indicações nesta lista</h4>
-      </td>
-    </tr>
-  </tfoot>
-</table>
+
+
 <ng-template #template>
   <div class="modal-body text-center">
-    <p>Tem certeza que quer deletar esta indicação?</p>
+    <p>Tem certeza que quer deletar esta indicação de ID? &nbsp;&nbsp;{{this.indicacaoId}}</p>
     <button type="button" class="btn btn-default" (click)="confirm()" >Sim</button>
     <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
   </div>
